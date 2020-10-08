@@ -23,23 +23,29 @@ class MainActivity : AppCompatActivity() {
         val whippedCream = findViewById<CheckBox>(R.id.has_whipped_cream)
         val choco = findViewById<CheckBox>(R.id.has_choco)
 
-        when {
-            choco.isChecked == true && whippedCream.isChecked == true -> {
-                hasWhippedCream = whippedCream.isChecked
-                hasChoco = choco.isChecked
-                displayPrice(numberOfCoffie * coffiePrice + 2 * numberOfCoffie)
-            }
-            choco.isChecked == true || whippedCream.isChecked == true -> {
-                hasWhippedCream = whippedCream.isChecked
-                hasChoco = choco.isChecked
-                displayPrice(numberOfCoffie * coffiePrice + numberOfCoffie)
-            }
-            else -> {
-                hasWhippedCream = whippedCream.isChecked
-                hasChoco = choco.isChecked
-                displayPrice(numberOfCoffie * coffiePrice)
-            }
-        }
+//         when {
+//             choco.isChecked == true && whippedCream.isChecked == true -> {
+//                 hasWhippedCream = whippedCream.isChecked
+//                 hasChoco = choco.isChecked
+//                 displayPrice(numberOfCoffie * coffiePrice + 2 * numberOfCoffie)
+//             }
+//             choco.isChecked == true || whippedCream.isChecked == true -> {
+//                 hasWhippedCream = whippedCream.isChecked
+//                 hasChoco = choco.isChecked
+//                 displayPrice(numberOfCoffie * coffiePrice + numberOfCoffie)
+//             }
+//             else -> {
+//                 hasWhippedCream = whippedCream.isChecked
+//                 hasChoco = choco.isChecked
+//                 displayPrice(numberOfCoffie * coffiePrice)
+//             }
+//         }
+                val example = Intent(Intent.ACTION_SEND).apply {
+                type = "*/*"
+                putExtra(Intent.EXTRA_SUBJECT, "Order")
+                putExtra(Intent.EXTRA_TEXT, displayPrice(numberOfCoffie * coffiePrice)) 
+                }
+                if (example.resolveActivity(packageManager) != null) { startActivity(example) }
     }
 
     private fun displayPrice(cost: Double) {
