@@ -43,13 +43,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displayPrice(cost: Double) {
-        val newCost = findViewById<TextView>(R.id.price_text_view)
         val Name = findViewById<EditText>(R.id.name)
         val input = Name.text.toString()
-        newCost.text =  "Name: $input" +
-                        "\nTotal: $" + cost + "\nThank You!" +
-                        "\nWith WhippedCream: $hasWhippedCream" +
-                        "\nWith Chocolate: $hasChoco"
+
+        return "Name: $input" + "\nTotal: $" + cost + "\nThank You!" + "\nWith WhippedCream: $hasWhippedCream" +
+                "\nWith Chocolate: $hasChoco"
     }
 
     fun increment(view: View) {
@@ -59,8 +57,10 @@ class MainActivity : AppCompatActivity() {
 
     fun decrement(view: View) {
         var quantity = findViewById<TextView>(R.id.quantity_text_view)
-        if (numberOfCoffie > 0) {
-            quantity.text = "" + --numberOfCoffie
-        } else quantity.text = "" + numberOfCoffie
+        if(numberOfCoffie == 1) {
+            Toast.makeText(this, "Cannot order less than 1 coffee", Toast.LENGTH_LONG).show()
+            return
+        }
+        quantity.text = "" + --numberOfCoffie
     }
 }
